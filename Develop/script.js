@@ -10,14 +10,14 @@ function generatePassword() {
     var passwordOutput = "";
     
     // prompt user for password length
-    var charLength = prompt("How many characters would you like your password to be? Choose between 8 and 128.");
+    var charLength = prompt("How many characters would you like your password to be? Choose a number between 8 and 128.");
 
      if (!charLength) {
         alert("This needs a value");
         generatePassword();
 
     } else if (charLength < 8 || charLength > 128) {
-        alert("You must choose between 8 and 128");
+        alert("You must choose between 8 and 128.");
         generatePassword();
 
     // prompt user for password criteria
@@ -25,18 +25,22 @@ function generatePassword() {
         alert("Your password will contain " + charLength + " characters");
         if(confirm("Should your password contain numbers? Click OK for yes and Cancel for no.")){
             Array.prototype.push.apply(choices, numbers);
+            alert("Numbers will be included in your password.");
         }
         
         if(confirm("Should your password contain special characters? Click OK for yes and Cancel for no.")) {
             Array.prototype.push.apply(choices, characters);
+            alert("Special characters will be included in your password.");
         }
 
         if(confirm("Should your password contain UPPERCASE letters? Click OK for yes and Cancel for no.")) {
             Array.prototype.push.apply(choices, alphaUpper);
+            alert("UPPERCASE letters will be included in your password.");
         }
         
         if(confirm("Should your password contain lowercase letters? Click OK for yes and Cancel for no.")) {
             Array.prototype.push.apply(choices, alphaLower);
+            alert("lowercase letters will be included in your password.");
         }
         
         //require user to complete criteria requirement
@@ -51,6 +55,7 @@ function generatePassword() {
                 var random = Math.floor(Math.random()*choices.length);
                 passwordOutput += choices[random];
                 console.log(passwordOutput);
+                
         }
     }
     }
@@ -66,7 +71,7 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
-  alert("Here is a password that meets all specified criteria");
+  alert("Here is a password that meets all selected criteria");
 };
 
 // Add event listener to generate button
