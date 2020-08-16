@@ -1,5 +1,16 @@
+// define criteria
+var characters = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", ":", ";", " < ", "=", " > ", " ? ", "@", "[", "]", " ^ ", "_", "`", "{", "|", "}", "~"];
+var alphaLower = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+var alphaUpper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+// generate password function
 function generatePassword() {
-    charLength = prompt("How many characters would you like your password to be? Choose between 8 and 128.");
+    var choices = [];
+    var passwordResult = "";
+    
+    // prompt user for password length
+    var charLength = prompt("How many characters would you like your password to be? Choose between 8 and 128.");
 
      if (!charLength) {
         alert("This needs a value");
@@ -9,13 +20,40 @@ function generatePassword() {
         alert("You must choose between 8 and 128");
         generatePassword();
 
+    // prompt user for password criteria
     } else {
-        confirmNumber = confirm("Should your password contain numbers?");
-        confirmCharacter = confirm("Should your password contain special characters?");
-        confirmUppercase = confirm("Should your password contain UPPERCASE letters?");
-        confirmLowercase = confirm("Should your password contain lowercase letters?");
-    };
+        alert("Your password will contain " + charLength + " characters");
+        if(confirm("Should your password contain numbers? Click OK for yes and Cancel for no.")){
+            Array.prototype.push.apply(choices, numbers);
+        }
+        
+        if(confirm("Should your password contain special characters? Click OK for yes and Cancel for no.")) {
+            Array.prototype.push.apply(choices, characters);
+        }
+
+        if(confirm("Should your password contain UPPERCASE letters? Click OK for yes and Cancel for no.")) {
+            Array.prototype.push.apply(choices, alphaUpper);
+        }
+        
+        if(confirm("Should your password contain lowercase letters? Click OK for yes and Cancel for no.")) {
+            Array.prototype.push.apply(choices, alphaLower);
+        }
+
+        if(choices.length === 0) {
+            alert("You must answer yes to at least one criteria prompt. Please try again.")
+            generatePassword()
+        }
+
+        else {
+            for(var i=0; i<charLength; i++){
+                var random = Math.floor(Math.random()*choices.length);
+                passwordResult += choices[random];
+                console.log(passwordResult);
+        }
+    }
+    }   
 };
+
 
 
 // Get references to the #generate element
