@@ -71,7 +71,7 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
-  alert("Here is a password that meets all selected criteria");
+  alert("Here is a password that meets all selected criteria. Thank you for using Password Generator!");
 };
 
 // Add event listener to generate button
